@@ -1,14 +1,20 @@
-/* Theme */
+/* Theme — dark palette aligned to logo */
 
 main {
-	background: #303F9F;
+	background: rgba(43, 47, 54, 0.55);
+	backdrop-filter: blur(1px);
 	color: #FAFAFA;
 }
 
 .icons-social a {
-	color: #FAFAFA;
+	color: rgba(216, 220, 230, 0.85);
 }
 
-.icons-social a svg path{
-	fill: #FAFAFA;
+.icons-social a:hover {
+	color: #00aaff;
+	text-shadow: 0 0 10px rgba(0, 170, 255, 0.7);
+}
+
+.icons-social a svg path {
+	fill: rgba(216, 220, 230, 0.85);
 }

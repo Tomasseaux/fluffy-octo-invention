@@ -7,8 +7,6 @@
 
 	<title>Amaolo</title>
 
-	<link rel="icon" href="favicon.ico" type="image/png" />
-
 	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
 	<link href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/reset.css">
@@ -24,7 +22,16 @@
 	<!-- <link rel="stylesheet" href="css/themes/yellow-black.css"> -->
 </head>
 <body>
+  <canvas id="bg"></canvas>
 	<main>
+		<div class="logo">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 80" width="230" height="80" role="img" aria-label="[AA] - Andrea Amaolo">
+				<rect x="2" y="2" width="226" height="76" rx="8" ry="8" fill="rgba(43,47,54,0.6)" stroke="#3d4555" stroke-width="2"/>
+				<text x="16" y="60" font-family="'Reem Kufi', sans-serif" font-size="58" fill="#d8dce6">[</text>
+				<text x="68" y="57" font-family="'Reem Kufi', sans-serif" font-size="42" fill="#00aaff" font-weight="700" letter-spacing="4">AA</text>
+				<text x="178" y="60" font-family="'Reem Kufi', sans-serif" font-size="58" fill="#d8dce6">]</text>
+			</svg>
+		</div>
 		<div class="intro">Ciao, I'm Andrea!</div>
 		<div class="tagline">Building systems and writing code | Exploring technology with curiosity, discipline, and an open‑source mindset</div>
 		<!-- Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
@@ -67,5 +74,102 @@
       </a>
     </div>
 	</main>
+  <script>
+    const canvas = document.getElementById('bg');
+    const context = canvas.getContext('2d');
+
+    let width;
+    let height;
+    let particles = [];
+    const mouse = { x: null, y: null };
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', (event) => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    });
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 2 + 0.5;
+      }
+
+      update() {
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 120) {
+            this.x -= dx * 0.02;
+            this.y -= dy * 0.02;
+          }
+        }
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        context.fillStyle = 'rgba(0, 170, 255, 0.9)';
+        context.fill();
+      }
+    }
+
+    function drawConnections() {
+      for (let index = 0; index < particles.length; index += 1) {
+        for (let otherIndex = index + 1; otherIndex < particles.length; otherIndex += 1) {
+          const dx = particles[index].x - particles[otherIndex].x;
+          const dy = particles[index].y - particles[otherIndex].y;
+          const distance = dx * dx + dy * dy;
+
+          if (distance < 12000) {
+            context.beginPath();
+            context.strokeStyle = 'rgba(0, 170, 255, 0.08)';
+            context.moveTo(particles[index].x, particles[index].y);
+            context.lineTo(particles[otherIndex].x, particles[otherIndex].y);
+            context.stroke();
+          }
+        }
+      }
+    }
+
+    function initParticles() {
+      particles = Array.from({ length: 110 }, () => new Particle());
+    }
+
+    function animate() {
+      context.clearRect(0, 0, width, height);
+      particles.forEach((particle) => {
+        particle.update();
+        particle.draw();
+      });
+      drawConnections();
+      window.requestAnimationFrame(animate);
+    }
+
+    resizeCanvas();
+    initParticles();
+    animate();
+  </script>
 </body>
 </html>
