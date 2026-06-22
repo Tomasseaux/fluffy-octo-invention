@@ -7,10 +7,16 @@ main {
 }
 
 main > .intro {
-	background: linear-gradient(135deg, #00aaff 0%, #a855f7 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
+	color: #00aaff;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+	main > .intro {
+		background: linear-gradient(135deg, #00aaff 0%, #a855f7 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
 }
 
 .tagline-main {
