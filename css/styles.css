@@ -1,5 +1,9 @@
 /* Typography */
 
+:root {
+	--icon-size: 3em;
+}
+
 html {
 	font-family: 'Roboto', sans-serif;
 	min-height: 100%;
@@ -8,7 +12,7 @@ html {
 body {
 	min-height: 100vh;
 	overflow: hidden;
-	background: #2b2f36;
+	background: #1a1d23;
 }
 
 @media (min-width: 576px) {
@@ -35,10 +39,6 @@ body {
 	}
 }
 
-.icons-social i {
-	font-size: 3em;
-}
-
 /* Custom Styles */
 
 #bg {
@@ -63,18 +63,55 @@ main {
 
 main > .intro {
 	font-family: 'Reem Kufi', sans-serif;
-	font-size: 3.75em;
-	font-weight: 600;
+	font-size: clamp(2rem, 6vw, 4rem);
+	font-weight: 700;
+	letter-spacing: 0.02em;
 }
 
 main > .tagline {
-	font-size: 1.5rem;
-	margin: 1.5rem 0;
-	font-weight: 100;
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	margin: 1.5rem auto;
+	max-width: 640px;
+}
+
+.tagline-main {
+	font-size: 1.6rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.tagline-sub {
+	font-size: 1.1rem;
+	font-weight: 300;
+	font-style: italic;
+	opacity: 0.85;
+}
+
+.icons-social {
+	margin-top: 0.5rem;
 }
 
 .icons-social i {
+	font-size: var(--icon-size);
 	padding: 10px;
+	display: inline-block;
+}
+
+.icon-subito {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	vertical-align: middle;
+}
+
+.icon-subito svg {
+	padding: 10px;
+	display: inline-block;
+	width: var(--icon-size);
+	height: var(--icon-size);
 }
 
 .logo {
@@ -83,22 +120,17 @@ main > .tagline {
 	margin-bottom: 1.6rem;
 }
 
-.logo svg {
-	filter: drop-shadow(0 0 10px rgba(0, 170, 255, 0.2));
+.logo img {
+	filter: drop-shadow(0 0 14px rgba(0, 170, 255, 0.35));
+	max-width: 100%;
+	height: auto;
 }
 
 .icons-social a {
   text-decoration: none;
-  transition: color 0.25s ease, text-shadow 0.25s ease;
+  transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.2s ease;
 }
 
-.devto {
-	margin-bottom: -0.20rem;
-}
-
-.devto svg {
-	margin-bottom: -0.20rem;
-	margin-left: 0.675rem;;
-	width: 2.65rem;
-	height: 2.65rem;
+.icons-social a:hover {
+	transform: scale(1.15);
 }
