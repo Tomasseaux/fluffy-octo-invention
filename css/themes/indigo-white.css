@@ -1,9 +1,25 @@
-/* Theme — dark palette aligned to logo */
+/* Theme — solid emotional palette */
 
 main {
-	background: rgba(43, 47, 54, 0.55);
-	backdrop-filter: blur(1px);
+	background: rgba(26, 29, 35, 0.72);
+	backdrop-filter: blur(4px);
 	color: #FAFAFA;
+}
+
+main > .intro {
+	background: linear-gradient(135deg, #00aaff 0%, #a855f7 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.tagline-main {
+	color: #FAFAFA;
+	text-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
+}
+
+.tagline-sub {
+	color: rgba(216, 220, 230, 0.85);
 }
 
 .icons-social a {
@@ -12,9 +28,9 @@ main {
 
 .icons-social a:hover {
 	color: #00aaff;
-	text-shadow: 0 0 10px rgba(0, 170, 255, 0.7);
+	text-shadow: 0 0 14px rgba(0, 170, 255, 0.8);
 }
 
-.icons-social a svg path {
-	fill: rgba(216, 220, 230, 0.85);
+.icon-subito svg path {
+	fill: currentColor;
 }
